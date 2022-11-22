@@ -13,13 +13,93 @@ part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';
 
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
-  final IAuthFacade iAuthFacade;
+  final IAuthFacade authFacade;
 
   SignInFormBloc({
-    required this.iAuthFacade,
+    required this.authFacade,
   }) : super(SignInFormState.initial()) {
-    on<SignInFormEvent>((event, emit) {
-      // TODO: implement event handler
+    on<_EmailChanged>((event, emit) async {
+      emit(
+        state.copyWith(
+          emailAddress: EmailAddress(event.emailString),
+          authFailureOrSuccessOption: none(),
+        ),
+      );
     });
+    on<_PasswordChanged>((event, emit) async {
+      emit(
+        state.copyWith(
+          password: Password(event.passwordString),
+          authFailureOrSuccessOption: none(),
+        ),
+      );
+    });
+    on<_SignInWithGooglePressed>(
+      (event, emit) async {
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            authFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await authFacade.signIdWithGoogle();
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            authFailureOrSuccessOption: some(failureOrSuccess),
+          ),
+        );
+      },
+    );
+    on<_RegisterWithEmailAndPasswordPressed>(
+      (event, emit) async {
+        _performActionOnAuthFacadeWithEmailAndPassword(
+          emit: emit,
+          forwardedCall: authFacade.registerWithEmailAndPassword,
+        );
+      },
+    );
+
+    on<_SignInWithEmailAndPasswordPressed>(
+      (event, emit) async {
+        _performActionOnAuthFacadeWithEmailAndPassword(
+          emit: emit,
+          forwardedCall: authFacade.signInWithEmailAndPassword,
+        );
+      },
+    );
+  }
+
+  Stream<SignInFormState> _performActionOnAuthFacadeWithEmailAndPassword({
+    required Emitter<SignInFormState> emit,
+    required Future<Either<AuthFailure, Unit>> Function({
+      required EmailAddress emailAddress,
+      required Password password,
+    })
+        forwardedCall,
+  }) async* {
+    Either<AuthFailure, Unit>? failureOrSuccess;
+    final isEmailValid = state.emailAddress.isValid();
+    final isPasswordValid = state.password.isValid();
+
+    if (isEmailValid && isPasswordValid) {
+      emit(
+        state.copyWith(
+          isSubmitting: true,
+          authFailureOrSuccessOption: none(),
+        ),
+      );
+      failureOrSuccess = await forwardedCall(
+        emailAddress: state.emailAddress,
+        password: state.password,
+      );
+    }
+    emit(
+      state.copyWith(
+        isSubmitting: false,
+        showErrorMessages: true,
+        authFailureOrSuccessOption: optionOf(failureOrSuccess),
+      ),
+    );
   }
 }
