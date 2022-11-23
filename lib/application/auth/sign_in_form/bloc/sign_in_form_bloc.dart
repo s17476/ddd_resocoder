@@ -55,7 +55,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     );
     on<_RegisterWithEmailAndPasswordPressed>(
       (event, emit) async {
-        _performActionOnAuthFacadeWithEmailAndPassword(
+        await _performActionOnAuthFacadeWithEmailAndPassword(
           emit: emit,
           forwardedCall: authFacade.registerWithEmailAndPassword,
         );
@@ -64,7 +64,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
 
     on<_SignInWithEmailAndPasswordPressed>(
       (event, emit) async {
-        _performActionOnAuthFacadeWithEmailAndPassword(
+        await _performActionOnAuthFacadeWithEmailAndPassword(
           emit: emit,
           forwardedCall: authFacade.signInWithEmailAndPassword,
         );
@@ -72,14 +72,14 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     );
   }
 
-  Stream<SignInFormState> _performActionOnAuthFacadeWithEmailAndPassword({
+  Future<void> _performActionOnAuthFacadeWithEmailAndPassword({
     required Emitter<SignInFormState> emit,
     required Future<Either<AuthFailure, Unit>> Function({
       required EmailAddress emailAddress,
       required Password password,
     })
         forwardedCall,
-  }) async* {
+  }) async {
     Either<AuthFailure, Unit>? failureOrSuccess;
     final isEmailValid = state.emailAddress.isValid();
     final isPasswordValid = state.password.isValid();
@@ -96,6 +96,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         password: state.password,
       );
     }
+    print('jest');
     emit(
       state.copyWith(
         isSubmitting: false,
