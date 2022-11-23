@@ -1,6 +1,8 @@
+import 'package:ddd_resocoder/injection.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  configureInjection();
   runApp(const MyApp());
 }
 
