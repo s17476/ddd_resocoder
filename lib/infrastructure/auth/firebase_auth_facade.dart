@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ddd_resocoder/domain/auth/user.dart' as user;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -6,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/i_auth_facade.dart';
 import '../../domain/auth/value_objects.dart';
+import './firebase_user_mapper.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -83,4 +85,14 @@ class FirebaseAuthFacade implements IAuthFacade {
       }
     }
   }
+
+  @override
+  Future<Option<user.User>> getSignedInUser() async =>
+      optionOf(firebaseAuth.currentUser?.toDomain());
+
+  @override
+  Future<void> signOut() => Future.wait([
+        googleSignIn.signOut(),
+        firebaseAuth.signOut(),
+      ]);
 }

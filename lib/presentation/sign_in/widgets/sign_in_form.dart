@@ -13,16 +13,19 @@ class SignInForm extends StatelessWidget {
         state.authFailureOrSuccessOption.fold(
           () => null,
           (either) => either.fold((failure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
                 content: Text(
-              failure.map(
-                cancelledByUser: (_) => 'Cancelled',
-                serverError: (_) => 'Server error',
-                emailAlreadyInUse: (_) => 'Email already in use',
-                invalidEmailAndPasswordCombination: (_) =>
-                    'Invalid email and password combination',
+                  failure.map(
+                    cancelledByUser: (_) => 'Cancelled',
+                    serverError: (_) => 'Server error',
+                    emailAlreadyInUse: (_) => 'Email already in use',
+                    invalidEmailAndPasswordCombination: (_) =>
+                        'Invalid email and password combination',
+                  ),
+                ),
               ),
-            )));
+            );
           }, (_) {
             // TODO
           }),
@@ -32,6 +35,7 @@ class SignInForm extends StatelessWidget {
         // print(state.showErrorMessages);
         return Form(
             child: ListView(
+          shrinkWrap: true,
           children: [
             const Text(
               '📝',

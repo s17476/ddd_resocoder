@@ -10,7 +10,7 @@ class SignInPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Sign In'),
       ),
-      body: const SignInForm(),
+      body: const Center(child: SignInForm()),
     );
   }
 }
