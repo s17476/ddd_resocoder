@@ -35,6 +35,7 @@ class SignInForm extends StatelessWidget {
         // print(state.showErrorMessages);
         return Form(
             child: ListView(
+          padding: const EdgeInsets.all(8),
           shrinkWrap: true,
           children: [
             const Text(
@@ -141,6 +142,14 @@ class SignInForm extends StatelessWidget {
                 ),
               ),
             ),
+            if (state.isSubmitting) ...[
+              const SizedBox(
+                height: 8,
+              ),
+              const LinearProgressIndicator(
+                value: null,
+              ),
+            ]
           ],
         ));
       },

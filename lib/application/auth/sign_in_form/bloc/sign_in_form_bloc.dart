@@ -96,7 +96,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         password: state.password,
       );
     }
-    print('jest');
     emit(
       state.copyWith(
         isSubmitting: false,
