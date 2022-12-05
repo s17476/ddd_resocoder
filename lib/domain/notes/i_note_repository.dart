@@ -8,6 +8,9 @@ abstract class INoteRepository {
 
   Stream<Either<NoteFailure, KtList<Note>>> watchUncompleted();
 
-  // watch uncompleted notes
-  // CUD
+  Future<Either<NoteFailure, Unit>> create(Note note);
+
+  Future<Either<NoteFailure, Unit>> update(Note note);
+
+  Future<Either<NoteFailure, Unit>> delete(Note note);
 }
