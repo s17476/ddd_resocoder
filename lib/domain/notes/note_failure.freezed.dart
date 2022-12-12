@@ -19,32 +19,39 @@ mixin _$NoteFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unexpected,
+    required TResult Function() insufficientPremission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unexpected,
+    TResult? Function()? insufficientPremission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? insufficientPremission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_InsufficientPremission value)
+        insufficientPremission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_InsufficientPremission value)? insufficientPremission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPremission value)? insufficientPremission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +114,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unexpected,
+    required TResult Function() insufficientPremission,
   }) {
     return unexpected();
   }
@@ -115,6 +123,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unexpected,
+    TResult? Function()? insufficientPremission,
   }) {
     return unexpected?.call();
   }
@@ -123,6 +132,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? insufficientPremission,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -135,6 +145,8 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_InsufficientPremission value)
+        insufficientPremission,
   }) {
     return unexpected(this);
   }
@@ -143,6 +155,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_InsufficientPremission value)? insufficientPremission,
   }) {
     return unexpected?.call(this);
   }
@@ -151,6 +164,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPremission value)? insufficientPremission,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -162,4 +176,108 @@ class _$_Unexpected implements _Unexpected {
 
 abstract class _Unexpected implements NoteFailure {
   const factory _Unexpected() = _$_Unexpected;
+}
+
+/// @nodoc
+abstract class _$$_InsufficientPremissionCopyWith<$Res> {
+  factory _$$_InsufficientPremissionCopyWith(_$_InsufficientPremission value,
+          $Res Function(_$_InsufficientPremission) then) =
+      __$$_InsufficientPremissionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InsufficientPremissionCopyWithImpl<$Res>
+    extends _$NoteFailureCopyWithImpl<$Res, _$_InsufficientPremission>
+    implements _$$_InsufficientPremissionCopyWith<$Res> {
+  __$$_InsufficientPremissionCopyWithImpl(_$_InsufficientPremission _value,
+      $Res Function(_$_InsufficientPremission) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_InsufficientPremission implements _InsufficientPremission {
+  const _$_InsufficientPremission();
+
+  @override
+  String toString() {
+    return 'NoteFailure.insufficientPremission()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InsufficientPremission);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function() insufficientPremission,
+  }) {
+    return insufficientPremission();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unexpected,
+    TResult? Function()? insufficientPremission,
+  }) {
+    return insufficientPremission?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? insufficientPremission,
+    required TResult orElse(),
+  }) {
+    if (insufficientPremission != null) {
+      return insufficientPremission();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_InsufficientPremission value)
+        insufficientPremission,
+  }) {
+    return insufficientPremission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_InsufficientPremission value)? insufficientPremission,
+  }) {
+    return insufficientPremission?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPremission value)? insufficientPremission,
+    required TResult orElse(),
+  }) {
+    if (insufficientPremission != null) {
+      return insufficientPremission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InsufficientPremission implements NoteFailure {
+  const factory _InsufficientPremission() = _$_InsufficientPremission;
 }
