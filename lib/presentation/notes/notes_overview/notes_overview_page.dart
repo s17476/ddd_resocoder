@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ddd_resocoder/application/auth/auth_bloc.dart';
 import 'package:ddd_resocoder/injection.dart';
+import 'package:ddd_resocoder/presentation/notes/notes_overview/widgets/notes_overview_body_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -71,6 +72,7 @@ class NotesOverviewPage extends StatelessWidget {
               ),
             ],
           ),
+          body: const NotesOverviewBody(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               // TODO: navigate

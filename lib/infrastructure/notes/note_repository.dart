@@ -93,7 +93,7 @@ class Noterepository implements INoteRepository {
         .onErrorReturnWith(
       (error, stackTrace) {
         if (error is PlatformException &&
-            error.message!.contains('PREMISSION_DENIED')) {
+            error.message!.contains('PERMISSION_DENIED')) {
           return left(const NoteFailure.insufficientPremission());
         } else {
           // log.error(error.toString());
@@ -124,7 +124,7 @@ class Noterepository implements INoteRepository {
         .onErrorReturnWith(
       (error, stackTrace) {
         if (error is PlatformException &&
-            error.message!.contains('PREMISSION_DENIED')) {
+            error.message!.contains('PERMISSION_DENIED')) {
           return left(const NoteFailure.insufficientPremission());
         } else {
           // log.error(error.toString());
