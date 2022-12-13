@@ -14,9 +14,8 @@ class SpalshPage extends StatelessWidget {
       listener: (context, state) {
         state.map(
           initial: (_) {},
-          authenticated: (_) {
-            print('AUTH OK');
-          },
+          authenticated: (_) =>
+              context.router.replace(const NotesOverviewRoute()),
           unauthenticated: (_) => context.router.replace(const SignInRoute()),
         );
       },

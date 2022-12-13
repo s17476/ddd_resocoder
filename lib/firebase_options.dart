@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '268206949075',
     projectId: 'note-app-875a1',
     storageBucket: 'note-app-875a1.appspot.com',
+    androidClientId: '268206949075-8meacg9gpr6igs734ulo5t9v5lj1sshd.apps.googleusercontent.com',
     iosClientId: '268206949075-mh0rj67u12790qg4oekb8uiui785cjbh.apps.googleusercontent.com',
     iosBundleId: 'com.lnasoftware.dddResocoder',
   );

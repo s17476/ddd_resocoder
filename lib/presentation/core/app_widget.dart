@@ -27,13 +27,15 @@ class AppWidget extends StatelessWidget {
         routeInformationParser: _appRouter.defaultRouteParser(),
         title: 'Notes',
         theme: ThemeData(
-          primarySwatch: Colors.green,
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+            primarySwatch: Colors.green,
+            inputDecorationTheme: InputDecorationTheme(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
-          ),
-        ),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: Colors.blue[900],
+            )),
         debugShowCheckedModeBanner: false,
       ),
     );
