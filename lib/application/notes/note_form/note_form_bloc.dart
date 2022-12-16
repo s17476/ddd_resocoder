@@ -20,7 +20,7 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
   final INoteRepository iNoteRepository;
   NoteFormBloc(this.iNoteRepository) : super(NoteFormState.initial()) {
     on<NoteFormEvent>((event, emit) async {
-      event.map(
+      await event.map(
         initialized: (e) async {
           if (e.note != null) {
             // editing
