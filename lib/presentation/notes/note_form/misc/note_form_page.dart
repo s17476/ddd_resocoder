@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ddd_resocoder/injection.dart';
 import 'package:ddd_resocoder/presentation/notes/note_form/widgets/body_field_widget.dart';
+import 'package:ddd_resocoder/presentation/notes/note_form/widgets/color_field_widget.dart';
 import 'package:ddd_resocoder/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,6 +146,7 @@ class NoteFormPageScaffold extends StatelessWidget {
               child: Column(
                 children: [
                   const BodyField(),
+                  const ColorField(),
                 ],
               ),
             ),
