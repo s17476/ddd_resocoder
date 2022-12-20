@@ -15,7 +15,7 @@ import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
 
 import '../../domain/notes/note.dart' as _i7;
-import '../notes/note_form/misc/note_form_page.dart' as _i4;
+import '../notes/note_form/note_form_page.dart' as _i4;
 import '../notes/notes_overview/notes_overview_page.dart' as _i3;
 import '../sign_in/sign_in_page.dart' as _i2;
 import '../splash/spalash_page.dart' as _i1;
