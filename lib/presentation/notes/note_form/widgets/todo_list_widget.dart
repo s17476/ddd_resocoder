@@ -1,6 +1,8 @@
+import 'package:ddd_resocoder/domain/notes/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:provider/provider.dart';
 
@@ -56,7 +58,10 @@ class TodoList extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: formTodos.value.size,
-            itemBuilder: (context, index) => TodoTile(index: index),
+            itemBuilder: (context, index) => TodoTile(
+              key: ValueKey(context.formTodos[index].id),
+              index: index,
+            ),
           ),
         );
       },
@@ -79,18 +84,93 @@ class TodoTile extends HookWidget {
       (_) => TodoItemPrimitive.empty(),
     );
 
-    return ListTile(
-      leading: Checkbox(
-        value: todo.done,
-        onChanged: (value) {
-          context.formTodos = context.formTodos.map(
-            (listTodo) =>
-                listTodo == todo ? todo.copyWith(done: value!) : listTodo,
-          );
-          context
-              .read<NoteFormBloc>()
-              .add(NoteFormEvent.todosChanged(context.formTodos));
-        },
+    final textEditingController = useTextEditingController(text: todo.name);
+
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 8,
+        top: 2,
+        bottom: 2,
+      ),
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          extentRatio: 0.2,
+          children: [
+            SlidableAction(
+              onPressed: (_) {
+                context.formTodos = context.formTodos.minusElement(todo);
+                context.read<NoteFormBloc>().add(
+                      NoteFormEvent.todosChanged(context.formTodos),
+                    );
+              },
+              backgroundColor: Theme.of(context).errorColor,
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Delete',
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+              ),
+            ),
+          ],
+        ),
+        child: Container(
+          margin: const EdgeInsets.only(right: 8),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ListTile(
+            leading: Checkbox(
+              value: todo.done,
+              onChanged: (value) {
+                context.formTodos = context.formTodos.map(
+                  (listTodo) =>
+                      listTodo == todo ? todo.copyWith(done: value!) : listTodo,
+                );
+                context
+                    .read<NoteFormBloc>()
+                    .add(NoteFormEvent.todosChanged(context.formTodos));
+              },
+            ),
+            title: TextFormField(
+              controller: textEditingController,
+              decoration: const InputDecoration(
+                hintText: 'Todo',
+                border: InputBorder.none,
+                counterText: '',
+              ),
+              maxLength: TodoName.maxLength,
+              onChanged: (value) {
+                context.formTodos = context.formTodos.map(
+                  (listTodo) =>
+                      listTodo == todo ? todo.copyWith(name: value) : listTodo,
+                );
+                context
+                    .read<NoteFormBloc>()
+                    .add(NoteFormEvent.todosChanged(context.formTodos));
+              },
+              validator: (_) {
+                return context.read<NoteFormBloc>().state.note.todos.value.fold(
+                      (_) => null,
+                      (todoList) => todoList[index].name.value.fold(
+                            (failure) => failure.maybeMap(
+                              orElse: () => null,
+                              empty: (_) => 'Cannot be empty',
+                              exceedingLenght: (_) => 'Too long',
+                              multiline: (_) =>
+                                  'Has not to be in a single line',
+                            ),
+                            (_) => null,
+                          ),
+                    );
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
